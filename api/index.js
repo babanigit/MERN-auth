@@ -9,6 +9,9 @@ dotenv.config();
 
 const app = express();
 
+app.use(express.json());
+
+
 
 
 mongoose
@@ -24,7 +27,7 @@ mongoose
   app.use('/api/auth', authRoutes);
 
 
-  
+
   app.get("/", (req, res, next) => {
     try {
       res.status(200).json({
