@@ -64,7 +64,9 @@ export const google = async (req, res, next) => {
       const generatedPassword =
         Math.random().toString(36).slice(-8) +
         Math.random().toString(36).slice(-8);
+
       const hashedPassword = bcryptjs.hashSync(generatedPassword, 10);
+
       const newUser = new User({
         username:
           req.body.name.split(' ').join('').toLowerCase() +
@@ -74,9 +76,13 @@ export const google = async (req, res, next) => {
         profilePicture: req.body.photo,
       });
       await newUser.save();
+
       const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+
       const { password: hashedPassword2, ...rest } = newUser._doc;
+
       const expiryDate = new Date(Date.now() + 3600000); // 1 hour
+      
       res
         .cookie('access_token', token, {
           httpOnly: true,

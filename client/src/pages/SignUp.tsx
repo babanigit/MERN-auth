@@ -1,5 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import OAuth from '../components/OAuth';
 
 // import OAuth from '../components/OAuth';
 
@@ -78,8 +79,7 @@ const SignUp = () => {
           >
             {loading ? 'Loading...' : 'Sign Up'}
           </button>
-
-          {/* <OAuth /> */}
+          <OAuth />
 
 
         </form>
