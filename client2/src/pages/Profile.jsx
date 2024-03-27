@@ -16,7 +16,7 @@ import {
   deleteUserSuccess,
   deleteUserFailure,
   signOut,
-} from '../redux/user/UserSlice';
+} from '../redux/user/userSlice';
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ export default function Profile() {
       handleFileUpload(image);
     }
   }, [image]);
-  const handleFileUpload = async (image: Blob | ArrayBuffer) => {
+  const handleFileUpload = async (image) => {
     const storage = getStorage(app);
     const fileName = new Date().getTime() + image.name;
     const storageRef = ref(storage, fileName);
@@ -55,15 +55,11 @@ export default function Profile() {
       }
     );
   };
-  const handleChange = (e: { target: { id: any; value: any; }; }) => {
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  console.log(formData)
-
-
-  // user update functionality
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       dispatch(updateUserStart());
@@ -86,7 +82,6 @@ export default function Profile() {
     }
   };
 
-    // user delete functionality
   const handleDeleteAccount = async () => {
     try {
       dispatch(deleteUserStart());
@@ -104,7 +99,6 @@ export default function Profile() {
     }
   };
 
-  // signOut
   const handleSignOut = async () => {
     try {
       await fetch('/api/auth/signout');
@@ -113,7 +107,6 @@ export default function Profile() {
       console.log(error);
     }
   };
-
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>

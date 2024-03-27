@@ -7,6 +7,10 @@ import cookieParser from 'cookie-parser';
 import path from 'path';
 dotenv.config();
 
+
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+
+
 const app = express();
 
 
