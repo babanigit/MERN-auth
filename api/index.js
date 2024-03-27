@@ -5,21 +5,26 @@ import userRoutes from './routes/user.route.js';
 import authRoutes from './routes/auth.route.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+
 dotenv.config();
-
-
-// const __dirname = path.dirname(new URL(import.meta.url).pathname);
-const __dirname = path.resolve();
-
-
 const app = express();
 
 
-app.use(express.static(path.join(__dirname, '/client2/dist')));
+// const __filename= fileURLToPath(import.meta.url)
+// const __dirname= path.dirname(__filename)
+// console.log(__dirname)
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client2', 'dist', 'index.html'));
-});
+
+
+const __dirname = path.resolve();
+
+// app.use(express.static(path.join(__dirname, '/client2/dist')));
+
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'client2', 'dist', 'index.html'));
+// });
 
 
 
@@ -27,7 +32,22 @@ app.use(express.json());
 app.use(cookieParser());
 
 
+app.use('/api/user', userRoutes);
+app.use('/api/auth', authRoutes);
 
+
+// use the client2 app
+app.use(express.static(path.join(__dirname, "/client2/dist")));
+
+console.log(__dirname)
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client2/dist/index.html'));
+});
+
+
+
+// connection
 mongoose
   .connect(process.env.DATABASE)
   .then(() => {
@@ -47,11 +67,6 @@ mongoose
       next(error);
     }
   });
-
-  app.use('/api/user', userRoutes);
-  app.use('/api/auth', authRoutes);
-
-
 
 // error handling
   app.use((err, req, res, next) => {
