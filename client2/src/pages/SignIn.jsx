@@ -4,7 +4,7 @@ import {
   signInStart,
   signInSuccess,
   signInFailure,
-} from '../redux/user/userSlice';
+} from '../redux/user/UserSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import OAuth from '../components/OAuth';
 
@@ -21,6 +21,7 @@ export default function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log("hello")
       dispatch(signInStart());
       const res = await fetch('/api/auth/signin', {
         method: 'POST',
@@ -30,6 +31,7 @@ export default function SignIn() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
+      console.log("data is ",data)
       if (data.success === false) {
         dispatch(signInFailure(data));
         return;

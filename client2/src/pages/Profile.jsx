@@ -16,7 +16,7 @@ import {
   deleteUserSuccess,
   deleteUserFailure,
   signOut,
-} from '../redux/user/userSlice';
+} from '../redux/user/UserSlice';
 
 export default function Profile() {
   const dispatch = useDispatch();
