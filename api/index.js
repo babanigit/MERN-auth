@@ -14,7 +14,7 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname);
 const app = express();
 
 
-app.use(express.static(path.join(__dirname, '/client/dist')));
+app.use(express.static(path.join(__dirname, '/client2/dist')));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client2', 'dist', 'index.html'));
