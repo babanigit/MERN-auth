@@ -61,6 +61,8 @@ export default function Profile() {
 
   console.log(formData)
 
+
+  // user update functionality
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     try {
@@ -84,6 +86,7 @@ export default function Profile() {
     }
   };
 
+    // user delete functionality
   const handleDeleteAccount = async () => {
     try {
       dispatch(deleteUserStart());
@@ -101,6 +104,7 @@ export default function Profile() {
     }
   };
 
+  // signOut
   const handleSignOut = async () => {
     try {
       await fetch('/api/auth/signout');
@@ -109,6 +113,7 @@ export default function Profile() {
       console.log(error);
     }
   };
+
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
