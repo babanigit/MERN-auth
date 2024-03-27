@@ -23,12 +23,7 @@ mongoose
     console.log(err);
   });
 
-  app.use('/api/user', userRoutes);
-  app.use('/api/auth', authRoutes);
-
-
-
-  app.get("/", (req, res, next) => {
+    app.get("/", (req, res, next) => {
     try {
       res.status(200).json({
         message: " api is live ",
@@ -38,6 +33,13 @@ mongoose
       next(error);
     }
   });
+
+  app.use('/api/user', userRoutes);
+  app.use('/api/auth', authRoutes);
+
+
+
+
 
 // error handling
   app.use((err, req, res, next) => {

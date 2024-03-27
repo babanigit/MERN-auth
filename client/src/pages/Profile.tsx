@@ -59,6 +59,8 @@ export default function Profile() {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
+  console.log(formData)
+
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     try {
