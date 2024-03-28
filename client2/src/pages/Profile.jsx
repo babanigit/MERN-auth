@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useSelector } from 'react-redux';
 import { useRef, useState, useEffect } from 'react';
 import {
@@ -18,7 +19,7 @@ import {
   signOut,
 } from '../redux/user/UserSlice';
 
-export default function Profile() {
+export default function Profile( props) {
   const dispatch = useDispatch();
   const fileRef = useRef(null);
   const [image, setImage] = useState(undefined);
@@ -108,7 +109,12 @@ export default function Profile() {
     }
   };
   return (
-    <div className='p-3 max-w-lg mx-auto'>
+    <div
+    
+    style={{background: props.theme.body, color:props.theme.text}}
+
+    
+    className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
       <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
         <input
@@ -144,40 +150,58 @@ export default function Profile() {
           )}
         </p>
         <input
+    style={{background: props.theme.body, color:props.theme.text,borderColor:props.theme.text}}
+    
+
           defaultValue={currentUser.username}
           type='text'
           id='username'
           placeholder='Username'
-          className='bg-slate-100 rounded-lg p-3'
+          className='bg-slate-100 rounded-lg p-3 border-2 '
           onChange={handleChange}
         />
         <input
+
+style={{background: props.theme.body, color:props.theme.text,borderColor:props.theme.text}}
+
           defaultValue={currentUser.email}
           type='email'
           id='email'
           placeholder='Email'
-          className='bg-slate-100 rounded-lg p-3'
+          className='bg-slate-100 rounded-lg p-3 border-2 '
           onChange={handleChange}
         />
         <input
+
+style={{background: props.theme.body, color:props.theme.text,borderColor:props.theme.text}}
+
           type='password'
           id='password'
           placeholder='Password'
-          className='bg-slate-100 rounded-lg p-3'
+          className='bg-slate-100 rounded-lg p-3 border-2 '
           onChange={handleChange}
         />
-        <button className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>
+        <button
+            style={{background: props.theme.text, color:props.theme.body}}
+
+         className=' p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'>
           {loading ? 'Loading...' : 'Update'}
         </button>
       </form>
       <div className='flex justify-between mt-5'>
         <span
           onClick={handleDeleteAccount}
-          className='text-red-700 cursor-pointer'
+          className=' cursor-pointer border-2 p-2 rounded-md border-red-500 '
+          style={{background: props.theme.body, color:props.theme.text}}
+
         >
           Delete Account
         </span>
-        <span onClick={handleSignOut} className='text-red-700 cursor-pointer'>
+        <span 
+        onClick={handleSignOut} 
+        className='cursor-pointer border-2 p-2 rounded-md border-red-500 '
+        style={{background: props.theme.body, color:props.theme.text}}
+        >
           Sign out
         </span>
       </div>

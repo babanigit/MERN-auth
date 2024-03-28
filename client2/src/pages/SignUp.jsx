@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import OAuth from '../components/OAuth';
 
-export default function SignUp() {
+export default function SignUp(props) {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -37,31 +38,43 @@ export default function SignUp() {
     }
   };
   return (
-    <div className='p-3 max-w-lg mx-auto'>
+    <div
+    style={{background: props.theme.body, color:props.theme.text}}
+
+    className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl text-center font-semibold my-7'>Sign Up</h1>
       <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
         <input
+                style={{background: props.theme.body, color:props.theme.text,borderColor:props.theme.text}}
+
           type='text'
           placeholder='Username'
           id='username'
-          className='bg-slate-100 p-3 rounded-lg'
+          className='bg-slate-100 p-3 rounded-lg border-2'
           onChange={handleChange}
         />
         <input
+                style={{background: props.theme.body, color:props.theme.text,borderColor:props.theme.text}}
+
           type='email'
           placeholder='Email'
           id='email'
-          className='bg-slate-100 p-3 rounded-lg'
+          className='bg-slate-100 p-3 rounded-lg border-2'
           onChange={handleChange}
         />
         <input
+                style={{background: props.theme.body, color:props.theme.text,borderColor:props.theme.text}}
+
           type='password'
           placeholder='Password'
           id='password'
-          className='bg-slate-100 p-3 rounded-lg'
+          className='bg-slate-100 p-3 rounded-lg border-2'
           onChange={handleChange}
         />
         <button
+                    style={{background: props.theme.text, color:props.theme.body}}
+
+
           disabled={loading}
           className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
         >

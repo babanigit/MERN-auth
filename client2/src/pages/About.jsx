@@ -1,7 +1,16 @@
+/* eslint-disable react/prop-types */
 
-const About = () => {
+const About = (props) => {
   return (
-    <div>About</div>
+    <>
+    <div
+        style={{background: props.theme.body, color:props.theme.text}}
+
+    >
+    <p>about</p>
+
+    </div>
+    </>
   )
 }
 

@@ -1,36 +1,25 @@
+// theme changer
 
-import {BrowserRouter,Routes,Route} from "react-router-dom"
-import Home from "./pages/Home"
-import About from "./pages/About"
-import SignIn from "./pages/SignIn"
-import SignUp from "./pages/SignUp"
-import Profile from "./pages/Profile"
-import Header from "./components/Header"
-import PrivateRoute from "./components/PrivateRoute"
+import { useState, createContext } from "react";
+import Main from "./components/Main";
+
+import { ThemeProvider } from "styled-components";
+import { themes } from "./assets/theme";
+
+export const SetThemeContext = createContext(() => {});
 
 function App() {
+  const [themeState, setThemeState] = useState("dark");
 
   return (
     <>
-
-<BrowserRouter>
-      {/* header */}
-      <Header />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/sign-in' element={<SignIn />} />
-        <Route path='/sign-up' element={<SignUp />} />
-
-        <Route element={<PrivateRoute />}>
-          <Route path='/profile' element={<Profile />} />
-        </Route>
-
-      </Routes>
-    </BrowserRouter>
-
+      <ThemeProvider theme={themes[themeState]}>
+        <SetThemeContext.Provider value={setThemeState}>
+          <Main theme={themes[themeState]} />
+        </SetThemeContext.Provider>
+      </ThemeProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
