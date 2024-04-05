@@ -6,6 +6,7 @@ import authRoutes from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
 import path from "path";
 import { fileURLToPath } from "url";
+import { verifyToken } from "./utils/verifyUser.js";
 
 dotenv.config();
 const app = express();
@@ -28,14 +29,18 @@ app.use(cookieParser());
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 
-// use the client2 app
-app.use(express.static(path.join(__dirname, "/client2/dist")));
 
-console.log(__dirname);
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/client2/dist/index.html"));
-});
+// // use the client2 app
+// app.use(express.static(path.join(__dirname, "/client2/dist")));
+
+// console.log(__dirname);
+
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "/client2/dist/index.html"));
+// });
+
+
 
 // connection
 mongoose

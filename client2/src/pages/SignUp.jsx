@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import OAuth from '../components/OAuth';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import OAuth from "../components/OAuth";
 
 export default function SignUp(props) {
   const [formData, setFormData] = useState({});
@@ -17,10 +17,10 @@ export default function SignUp(props) {
     try {
       setLoading(true);
       setError(false);
-      const res = await fetch('/api/auth/signup', {
-        method: 'POST',
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
@@ -31,7 +31,7 @@ export default function SignUp(props) {
         setError(true);
         return;
       }
-      navigate('/sign-in');
+      navigate("/sign-in");
     } catch (error) {
       setLoading(false);
       setError(true);
@@ -39,56 +39,65 @@ export default function SignUp(props) {
   };
   return (
     <div
-    style={{background: props.theme.body, color:props.theme.text}}
-
-    className='p-3 max-w-lg mx-auto'>
-      <h1 className='text-3xl text-center font-semibold my-7'>Sign Up</h1>
-      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+      style={{ background: props.theme.body, color: props.theme.text }}
+      className="p-3 max-w-lg mx-auto"
+    >
+      <h1 className="text-3xl text-center font-semibold my-7">Sign Up</h1>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
-                style={{background: props.theme.body, color:props.theme.text,borderColor:props.theme.text}}
-
-          type='text'
-          placeholder='Username'
-          id='username'
-          className='bg-slate-100 p-3 rounded-lg border-2'
+          style={{
+            background: props.theme.body,
+            color: props.theme.text,
+            borderColor: props.theme.text,
+          }}
+          type="text"
+          placeholder="Username"
+          id="username"
+          className="bg-slate-100 p-3 rounded-lg border-2"
           onChange={handleChange}
         />
         <input
-                style={{background: props.theme.body, color:props.theme.text,borderColor:props.theme.text}}
-
-          type='email'
-          placeholder='Email'
-          id='email'
-          className='bg-slate-100 p-3 rounded-lg border-2'
+          style={{
+            background: props.theme.body,
+            color: props.theme.text,
+            borderColor: props.theme.text,
+          }}
+          type="email"
+          placeholder="Email"
+          id="email"
+          className="bg-slate-100 p-3 rounded-lg border-2"
           onChange={handleChange}
         />
         <input
-                style={{background: props.theme.body, color:props.theme.text,borderColor:props.theme.text}}
-
-          type='password'
-          placeholder='Password'
-          id='password'
-          className='bg-slate-100 p-3 rounded-lg border-2'
+          style={{
+            background: props.theme.body,
+            color: props.theme.text,
+            borderColor: props.theme.text,
+          }}
+          type="password"
+          placeholder="Password"
+          id="password"
+          className="bg-slate-100 p-3 rounded-lg border-2"
           onChange={handleChange}
         />
         <button
-                    style={{background: props.theme.text, color:props.theme.body}}
-
-
+          style={{ background: props.theme.text, color: props.theme.body }}
           disabled={loading}
-          className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
+          className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
         >
-          {loading ? 'Loading...' : 'Sign Up'}
+          {loading ? "Loading..." : "Sign Up"}
         </button>
         <OAuth />
       </form>
-      <div className='flex gap-2 mt-5'>
+      <div className="flex gap-2 mt-5">
         <p>Have an account?</p>
-        <Link to='/sign-in'>
-          <span className='text-blue-500'>Sign in</span>
+        <Link to="/sign-in">
+          <span className="text-blue-500">Sign in</span>
         </Link>
       </div>
-      <p className='text-red-700 mt-5'>{error && 'Something went wrong!'}</p>
+      <p className="text-red-500 mt-5">
+        {error ? error.message || "Something went wrong!" : ""}
+      </p>
     </div>
   );
 }

@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   signInStart,
   signInSuccess,
   signInFailure,
-} from '../redux/user/UserSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import OAuth from '../components/OAuth';
+} from "../redux/user/UserSlice";
+import { useDispatch, useSelector } from "react-redux";
+import OAuth from "../components/OAuth";
 
 export default function SignIn(props) {
   const [formData, setFormData] = useState({});
@@ -22,70 +22,75 @@ export default function SignIn(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("hello")
+      console.log("hello");
       dispatch(signInStart());
-      const res = await fetch('/api/auth/signin', {
-        method: 'POST',
+      const res = await fetch("/api/auth/signin", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      console.log("data is ",data)
+      console.log("data is ", data);
       if (data.success === false) {
         dispatch(signInFailure(data));
         return;
       }
       dispatch(signInSuccess(data));
-      navigate('/');
+      navigate("/");
     } catch (error) {
       dispatch(signInFailure(error));
     }
   };
   return (
     <div
-    style={{background: props.theme.body, color:props.theme.text}}
-
-     className='p-3 max-w-lg mx-auto'>
-      <h1 className='text-3xl text-center font-semibold my-7'>Sign In</h1>
-      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+      style={{ background: props.theme.body, color: props.theme.text }}
+      className="p-3 max-w-lg mx-auto"
+    >
+      <h1 className="text-3xl text-center font-semibold my-7">Sign In</h1>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
-        style={{background: props.theme.body, color:props.theme.text,borderColor:props.theme.text}}
-
-          type='email'
-          placeholder='Email'
-          id='email'
-          className='bg-slate-100 p-3 rounded-lg border-2'
+          style={{
+            background: props.theme.body,
+            color: props.theme.text,
+            borderColor: props.theme.text,
+          }}
+          type="email"
+          placeholder="Email"
+          id="email"
+          className="bg-slate-100 p-3 rounded-lg border-2"
           onChange={handleChange}
         />
         <input
-        style={{background: props.theme.body, color:props.theme.text,borderColor:props.theme.text}}
-
-          type='password'
-          placeholder='Password'
-          id='password'
-          className='bg-slate-100 p-3 rounded-lg border-2'
+          style={{
+            background: props.theme.body,
+            color: props.theme.text,
+            borderColor: props.theme.text,
+          }}
+          type="password"
+          placeholder="Password"
+          id="password"
+          className="bg-slate-100 p-3 rounded-lg border-2"
           onChange={handleChange}
         />
         <button
-                    style={{background: props.theme.text, color:props.theme.body}}
-
+          style={{ background: props.theme.text, color: props.theme.body }}
           disabled={loading}
-          className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
+          className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
         >
-          {loading ? 'Loading...' : 'Sign In'}
+          {loading ? "Loading..." : "Sign In"}
         </button>
         <OAuth />
       </form>
-      <div className='flex gap-2 mt-5'>
+      <div className="flex gap-2 mt-5">
         <p>Dont Have an account?</p>
-        <Link to='/sign-up'>
-          <span className='text-blue-500'>Sign up</span>
+        <Link to="/sign-up">
+          <span className="text-blue-500">Sign up</span>
         </Link>
       </div>
-      <p className='text-red-500 mt-5'>
-        {error ? error.message || 'Something went wrong!' : ''}
+      <p className="text-red-500 mt-5">
+        {error ? error.message || "Something went wrong!" : ""}
       </p>
     </div>
   );
