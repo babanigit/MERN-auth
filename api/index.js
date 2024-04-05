@@ -5,6 +5,7 @@ import userRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
 import path from "path";
+import cors from "cors"
 import { fileURLToPath } from "url";
 import { verifyToken } from "./utils/verifyUser.js";
 
@@ -25,6 +26,23 @@ const __dirname = path.resolve();
 
 app.use(express.json());
 app.use(cookieParser());
+
+
+
+const corsOptions = {
+  origin: "https://mern-auth-nu.vercel.app", // frontend URI (ReactJS)
+  credentials: true // Allows session cookies to be sent from frontend to backend 
+}
+
+app.use(cors(
+  corsOptions
+  ));
+
+// // Configure CORS to allow requests from your frontend domain
+// app.use(cors({
+//   origin: 'http://localhost:3000/', // Replace with your frontend URL
+//   credentials: true // Allows session cookies to be sent from frontend to backend
+// }));
 
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
