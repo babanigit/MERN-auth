@@ -64,7 +64,7 @@ export default function Profile( props) {
     e.preventDefault();
     try {
       dispatch(updateUserStart());
-      const res = await fetch(`https://mern-auth-1-37hu.onrender.com/api/user/update/${currentUser._id}`, {
+      const res = await fetch(`https://mern-auth-server-seven.vercel.app/api/user/update/${currentUser._id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ export default function Profile( props) {
   const handleDeleteAccount = async () => {
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`https://mern-auth-1-37hu.onrender.com/api/user/delete/${currentUser._id}`, {
+      const res = await fetch(`https://mern-auth-server-seven.vercel.app/api/user/delete/${currentUser._id}`, {
         method: 'DELETE',
       });
       const data = await res.json();
@@ -102,7 +102,7 @@ export default function Profile( props) {
 
   const handleSignOut = async () => {
     try {
-      await fetch('https://mern-auth-1-37hu.onrender.com/api/auth/signout');
+      await fetch('/api/auth/signout');
       dispatch(signOut())
     } catch (error) {
       console.log(error);
