@@ -24,7 +24,7 @@ export default function SignIn(props) {
     try {
       console.log("hello");
       dispatch(signInStart());
-      const res = await fetch("https://mern-auth-1-37hu.onrender.com/api/auth/signin", {
+      const res = await fetch("https://mern-auth-server-seven.vercel.app/api/auth/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
