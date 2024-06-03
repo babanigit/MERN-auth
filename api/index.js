@@ -5,7 +5,7 @@ import userRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
 import path from "path";
-import cors from "cors"
+import cors from "cors";
 import { fileURLToPath } from "url";
 import { verifyToken } from "./utils/verifyUser.js";
 
@@ -27,16 +27,12 @@ const __dirname = path.resolve();
 app.use(express.json());
 app.use(cookieParser());
 
-
-
 const corsOptions = {
   origin: "https://mern-auth-nu.vercel.app", // frontend URI (ReactJS)
-  credentials: true // Allows session cookies to be sent from frontend to backend 
-}
+  credentials: true, // Allows session cookies to be sent from frontend to backend
+};
 
-app.use(cors(
-  corsOptions
-  ));
+app.use(cors(corsOptions));
 
 // // Configure CORS to allow requests from your frontend domain
 // app.use(cors({
@@ -47,18 +43,14 @@ app.use(cors(
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 
+console.log(__dirname);
 
+// use the client2 app
+app.use(express.static(path.join(__dirname, "/client2/dist")));
 
-// // use the client2 app
-// app.use(express.static(path.join(__dirname, "/client2/dist")));
-
-// console.log(__dirname);
-
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "/client2/dist/index.html"));
-// });
-
-
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client2/dist/index.html"));
+});
 
 // connection
 mongoose
